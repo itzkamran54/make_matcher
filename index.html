@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Compatibility Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+        }
+
+        .header h1 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 26px;
+            text-align: center;
+        }
+
+        .form-section {
+            margin-top: 20px;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        .input-container label {
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: block;
+            color: #fff;
+        }
+
+        .input-container input,
+        .input-container select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #feb47b;
+            background-color: #fff;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .photo-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .photo-upload label {
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-label {
+            background-color: #feb47b;
+            color: #333;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .file-label:hover {
+            background-color: #ff7e5f;
+        }
+
+        .image-preview {
+            margin-top: 20px;
+            max-width: 150px;
+            max-height: 150px;
+            border-radius: 10px;
+            border: 2px solid #feb47b;
+            display: none;
+        }
+
+        .submit-btn {
+            background-color: #feb47b;
+            color: #333;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .submit-btn:hover {
+            background-color: #ff7e5f;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 14px;
+            color: #fff;
+            font-style: italic;
+            text-align: center;
+            width: 100%;
+        }
+
+        .scrollable-section {
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 10px;
+            margin-top: 20px;
+            border: 2px solid #feb47b;
+            border-radius: 10px;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Made by Kamran</h1>
+           
+            <h1>Love Compatibility Calculator</h1>
+        </div>
+
+        <div class="form-section">
+            <div class="input-container">
+                <label for="name1">Boy's Name:</label>
+                <input type="text" id="name1" placeholder="Enter  the Boy Name" required>
+            </div>
+
+            <div class="input-container">
+                <label for="dob1">Boy's Date of Birth:</label>
+                <input type="date" id="dob1" required>
+            </div>
+
+            <div class="input-container">
+                <label for="name2">Girl's Name:</label>
+                <input type="text" id="name2" placeholder="Enter the Girl Name" required>
+            </div>
+
+            <div class="input-container">
+                <label for="dob2">Girl's Date of Birth:</label>
+                <input type="date" id="dob2" required>
+            </div>
+
+            <div class="photo-upload">
+                <label for="photo1">Boy's Photo:</label>
+                <label for="photo1" class="file-label">Choose File</label>
+                <input type="file" id="photo1" class="file-input" accept="image/*" onchange="showPreview('photo1', 'preview1')">
+                <img id="preview1" class="image-preview" src="" alt="Boy Photo Preview">
+            </div>
+
+            <div class="photo-upload">
+                <label for="photo2">Girl's Photo:</label>
+                <label for="photo2" class="file-label">Choose File</label>
+                <input type="file" id="photo2" class="file-input" accept="image/*" onchange="showPreview('photo2', 'preview2')">
+                <img id="preview2" class="image-preview" src="" alt="Girl Photo Preview">
+            </div>
+
+            <button class="submit-btn" onclick="nextPage()">Check Compatibility</button>
+        </div>
+
+        <footer>
+           
+        </footer>
+    </div>
+
+    <script>
+        // Show the image preview when a file is selected
+        function showPreview(inputId, previewId) {
+            const file = document.getElementById(inputId).files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                document.getElementById(previewId).src = e.target.result;
+                document.getElementById(previewId).style.display = 'block';
+            }
+
+            reader.readAsDataURL(file);
+        }
+
+        function nextPage() {
+            const name1 = document.getElementById("name1").value;
+            const dob1 = new Date(document.getElementById("dob1").value);
+            const name2 = document.getElementById("name2").value;
+            const dob2 = new Date(document.getElementById("dob2").value);
+
+            if (!name1 || !dob1 || !name2 || !dob2) {
+                alert("Please fill in all the details!");
+                return;
+            }
+
+            let compatibility = Math.floor(Math.random() * 100) + 1;
+
+   
+
+            // Store data in local storage for the next page
+            localStorage.setItem("name1", name1);
+            localStorage.setItem("dob1", dob1);
+            localStorage.setItem("name2", name2);
+            localStorage.setItem("dob2", dob2);
+            localStorage.setItem("compatibility", compatibility);
+
+            // Redirect to the second page (you can create another HTML file for this)
+            window.location.href = "compatibilityResult.html";
+        }
+    </script>
+</body>
+</html>

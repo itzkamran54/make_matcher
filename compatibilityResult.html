@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compatibility Result</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 50px 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            color: #333;
+        }
+
+        .container h1 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: #ff6f61;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .message {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .percentage {
+            font-size: 1.8rem;
+            color: #ff6f61;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 14px 30px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #ff4e40;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Compatibility Result</h1>
+
+        <!-- Display Names and Compatibility -->
+        <div id="compatibilityResult"></div>
+
+        <!-- Display Compatibility Percentage -->
+        <div id="compatibilityPercentage" class="percentage"></div>
+
+        <!-- Display Age-Based Messages -->
+        <div id="ageMessage" class="message"></div>
+
+        <!-- Display Random Message -->
+        <div id="randomMessage" class="message"></div>
+
+        <!-- Back Button -->
+        <button onclick="goBack()">Back</button>
+    </div>
+
+    
+
+    <script>
+        // Retrieve data from local storage
+        const name1 = localStorage.getItem("name1");
+        const dob1 = new Date(localStorage.getItem("dob1"));
+        const name2 = localStorage.getItem("name2");
+        const dob2 = new Date(localStorage.getItem("dob2"));
+        const compatibility = localStorage.getItem("compatibility");
+
+        // Calculate age difference
+        const age1 = new Date().getFullYear() - dob1.getFullYear();
+        const age2 = new Date().getFullYear() - dob2.getFullYear();
+
+        let ageMessage = "";
+        let randomMessages = [
+            "You two make an amazing pair! 😍",
+            "Love is in the air! 💕",
+            "Opposites attract, but you both seem perfect together! 💫",
+            "Together, you both shine brighter than the stars! ✨",
+            "Nothing beats the magic of love. You're a perfect match! ✨",
+            "You're like a peanut butter and jelly sandwich – a classic combo! 🥪",
+            "Looks like you've found your soulmate! ❤️",
+            "True love is rare, but you two have found it! 💑",
+            "You complete each other in every way! 💖",
+            "Your love story is just beginning, but it's already perfect! 📖",
+            "Love knows no bounds, and neither do you! 🌍",
+            "Together, you two are unstoppable! 💪",
+            "You’re both like fire and ice – perfectly balanced! 🔥❄️",
+            "You’re the yin to their yang! 🌓",
+            "Looks like love is treating you both right! 💌",
+            "The universe is smiling at your love story! 🌌",
+            "You two are the definition of 'couple goals'! 😎",
+            "Together, you both are a force to be reckoned with! ⚡",
+            "A perfect match made in heaven! 🌸",
+            "It’s written in the stars that you two are meant to be! 🌠"
+        ];
+
+        // Random message selection
+        let randomMessage = randomMessages[Math.floor(Math.random() * randomMessages.length)];
+
+        if (age1 > age2) {
+            // Boy is older
+            ageMessage = "The boy is older than the girl. Such a gentleman! 😄";
+        } else if (age2 > age1) {
+            // Girl is older
+            ageMessage = "The girl is older than the boy! Looks like she's your big sis! 😂 But hey, age doesn't matter in love! ❤️";
+        } else {
+            // Both are the same age
+            ageMessage = "You both are the same age! That’s perfect! 😍";
+        }
+
+        // Display the compatibility result
+        document.getElementById("compatibilityResult").innerHTML = `
+            <p>Compatibility between ${name1} and ${name2} is ${compatibility}%!</p>
+        `;
+        
+        // Display the compatibility percentage
+        document.getElementById("compatibilityPercentage").textContent = `Compatibility: ${compatibility}%`;
+
+        // Display the age message
+        document.getElementById("ageMessage").textContent = ageMessage;
+
+        // Display the random compatibility message
+        document.getElementById("randomMessage").textContent = randomMessage;
+
+        // Function to go back to the first page
+        function goBack() {
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+</html>
